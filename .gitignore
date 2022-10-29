@@ -6,3 +6,7 @@ crosstool-ng
 aesd-build
 .vscode/
 test.sh.log
+reference.txt
+toolchain
+.gitignore
+actions-runner
