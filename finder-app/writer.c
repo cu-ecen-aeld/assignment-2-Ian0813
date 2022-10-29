@@ -50,6 +50,18 @@ void file_write(int fd, const char *str) {
     return;	
 }
 
+void file_close(int fd) {
+
+	if (close(fd) == FUN_FAILURE) {
+        printf("func %s fail, errno: %d\n", __func__, errno);
+        printf("error: %s\n", strerror(errno));
+        syslog(LOG_USER | LOG_ERR, "%s", strerror(errno));
+        exit(EXIT_FAILURE);
+	}
+    
+	return;
+}
+
 int main(int argc, char *argv[]) {
 
     const char *file_name = NULL, *str = NULL;
@@ -70,6 +82,7 @@ int main(int argc, char *argv[]) {
 	file_write(fd, str);
 	syslog(LOG_USER | LOG_DEBUG, "Writing %s to %s", str, file_name);
 
+    file_close(fd);
 	closelog();
 	return 0;
 }
