@@ -9,7 +9,7 @@ NUMFILES=10
 WRITESTR=AELD_IS_FUN
 WRITEDIR=/tmp/aeld-data
 username=$(cat conf/username.txt)
-make -f Makefile 2> /dev/null || { echo "Compilation fails."; exit 1; }
+#make -f Makefile 2> /dev/null || { echo "Compilation fails."; exit 1; }
 
 if [ $# -lt 2 ]
 then
@@ -43,8 +43,8 @@ else
 fi
 
 #echo "Removing the old writer utility and compiling as a native application"
-#make clean
-#make
+make clean
+make
 
 for i in $( seq 1 $NUMFILES)
 do
@@ -52,7 +52,7 @@ do
 done
 
 OUTPUTSTRING=$(./finder.sh "$WRITEDIR" "$WRITESTR")
-make clean 2> /dev/null || { echo "Fail to delete files by make clean."; exit 1; }
+#make clean 2> /dev/null || { echo "Fail to delete files by make clean."; exit 1; }
 
 set +e
 echo ${OUTPUTSTRING} | grep "${MATCHSTR}"
