@@ -71,8 +71,9 @@ int main(int argc, char *argv[]) {
     /* The default argc value is 1, but we will pass in two arguments so the argc will equal 3. */	
     if (argc < 3) {
         printf("Please pass in the correct arguments.\n");
-		exit(EXIT_FAILURE);
-	} else {
+        syslog(LOG_USER | LOG_ERR, "Please pass in the correct arguments.");
+        exit(EXIT_FAILURE);
+    } else {
        file_name = argv[1];
 	   str = argv[2];
 	   openlog(NULL, LOG_PID, LOG_USER);
